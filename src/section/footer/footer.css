@@ -1,0 +1,24 @@
+.footer{
+    display: block;
+    float: left;
+    width: 100%;
+    background: #141414;
+    color: white;
+    font-size: 14px;
+    min-height: 140px;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer .sobre, .footer .proposta, .footer .anuncie, .footer .valores {
+    color: white;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+.footer .email {
+    color: white;
+    font-size: 16px;
+    display: block;
+    padding-top: 30px;
+}

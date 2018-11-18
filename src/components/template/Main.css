@@ -1,0 +1,10 @@
+
+main > div {
+    background-color: #FFF;
+    box-shadow: 0 0 15px #0004;
+}
+
+.formGroup .centered {
+    display: block;
+    text-align: center;
+}

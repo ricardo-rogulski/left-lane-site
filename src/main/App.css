@@ -1,0 +1,18 @@
+
+
+@import url('https://fonts.googleapis.com/css?family=Jura:400,700');
+
+body{
+    font-family: 'Jura', sans-serif;
+}
+
+
+/* Tablet */
+@media(max-width: 768px) {
+
+}
+
+/* Celular */
+@media(max-width: 576px) {
+
+}
