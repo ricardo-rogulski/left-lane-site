@@ -15,16 +15,11 @@
 /*
  Menu 
 */
-.header .menu{
+.header .search{
     float: left;
+    padding: 12px;
 }
-.header .menu .anuncie {
-    color: white;
-    padding: 14px 10px;
-    font-size: 14px;
-    display: block;
 
-}
 
 /*
  Logo

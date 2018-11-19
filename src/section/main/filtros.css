@@ -1,13 +1,59 @@
 
-.filtros{
-    display: block;
+.search-link.on::after {
+    content: "\f205";
+    font-family: 'FontAwesome';
+    padding-left: 10px;
+    color: white;
+    font-size: 18px;
+}
+
+.search-link.off::after {
+    content: "\f204";
+    font-family: 'FontAwesome';
+    padding-left: 10px;
+    color: white;
+    font-size: 18px;
+}
+
+
+
+.filtros-lv1 {
+    display: none;
     width: 100;
-    height: 120px;
+    height: 40px;
+    background: rgba(252,232,232,0.12);
+}
+
+.filtros-lv1.on{
+    display: block;
+}
+
+.filtros-lv1 .marca, .filtros-lv1 .modelo, .filtros-lv1 .ano, .filtros-lv1 .valor, .filtros-lv1 .local {
+    color: white;
+    display: inline-block;
+    padding: 8px 30px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+
+/*
+  LV2
+*/
+.filtros-lv2 {
+    display: none;
+    width: 100;
+    height: 60px;
     background: rgba(252,232,232,0.06);
 }
 
-.filtros .marca, .filtros .modelo, .filtros .ano, .filtros .valor, .filtros .local {
+.filtros-lv2.on{
+    display: block;
+}
+
+.filtros-lv2 .item {
     color: white;
     padding: 0 20px;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: bold;
 }

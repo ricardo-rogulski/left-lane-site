@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 
 import './header.css'
+import '../../scripts/filter.js'
 
 import Logo from './logo'
-import Menu from './menu'
+import Search from './search'
 import Login from './login'
 
 export default class Header extends Component {
@@ -11,7 +12,7 @@ export default class Header extends Component {
     render(){
         return (
             <div className='header'>
-                <Menu />
+                <Search />
                 <Logo />
                 <Login />
             </div>
