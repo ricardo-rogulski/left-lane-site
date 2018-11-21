@@ -5,15 +5,16 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 
 import Header from '../section/header/header'
-import Main from '../section/main/main'
+//import Main from '../section/main/main'
 import Footer from '../section/footer/footer'
+import Routes from './Routes'
 
 
 export default props =>
     <BrowserRouter>
         <div className="app">
             <Header />
-            <Main />
+            <Routes />
             <Footer />
         </div>
     </BrowserRouter>

@@ -2,7 +2,7 @@
     display: block;
     float: left;
     width: 100%;
-    background: #141414;
+    background: #1a1d26;
     color: white;
     font-size: 14px;
     min-height: 140px;
@@ -10,7 +10,7 @@
     text-align: center;
 }
 
-.footer .sobre, .footer .proposta, .footer .anuncie, .footer .valores {
+.footer .home, .footer .sobre, .footer .proposta_, .footer .anuncie_, .footer .precos_ {
     color: white;
     padding: 0 20px;
     font-size: 14px;

@@ -7,17 +7,21 @@ export default class Footer extends Component {
     render(){
         return (
             <div className="footer">
-                    <Link to="/" className="sobre">
+                    <Link to="/home" className="home">
+                        <span>Home</span>
+                    </Link>
+
+                    <Link to="/about" className="sobre">
                         <span>Sobre nós</span>
                     </Link>
-                    <Link to="/" className="proposta">
+                    <Link to="/proposta" className="proposta_">
                         <span>Uma proposta diferente</span>
                     </Link>
-                    <Link to="/" className="anuncie">
+                    <Link to="/anuncie" className="anuncie_">
                         <span>Anuncie seu carro</span>
                     </Link>
-                    <Link to="/" className="valores">
-                        <span>Valores</span>
+                    <Link to="/precos" className="precos_">
+                        <span>Preços</span>
                     </Link>
 
                     <span className="email">contato@leftlane.com.br</span>

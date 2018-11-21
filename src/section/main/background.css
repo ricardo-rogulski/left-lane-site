@@ -1,0 +1,25 @@
+
+.big-background-img{
+    -webkit-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: ' ';
+    background: url('../../assets/images/road.jpg') no-repeat center top 100%;
+    background-size: cover;
+    transition: 1s;
+    z-index: 10;
+}
+
+.big-background-img.opa{
+    opacity: 0;
+    transition: opacity 2s;
+}
+
+.big-background-img.hidden{
+    display: none;
+}

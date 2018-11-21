@@ -3,9 +3,8 @@
     float: left;
     display: block;
     width: 100%;
-    min-height: 1200px;
+    min-height: 1080px;
     background: #222222;
     color: white;
-    background: url('../../assets/images/road.jpg') no-repeat center top 100%;
-    background-size: cover;
+    padding-top: 20px;
 }
