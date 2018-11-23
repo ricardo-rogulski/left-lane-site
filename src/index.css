@@ -8,3 +8,13 @@ html, body{
   background: #222222;
   font-family: 'Jura', sans-serif !important;
 }
+
+body .btn{
+  padding: 0;
+}
+
+body .btn-link {
+	font-weight: bold;
+	color: white;
+	background-color: transparent;
+}
