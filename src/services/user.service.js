@@ -1,4 +1,5 @@
 import { authHeader } from './';
+import { getLoginServiceUrl } from './backEndUrlService';
 
 export const userService = {
     login,
@@ -6,7 +7,7 @@ export const userService = {
     getAll
 };
 
-var apiUrl = 'http://localhost:3003/oapi'
+var apiUrl = getLoginServiceUrl()
 
 function login(email, password) {
     const requestOptions = {
@@ -25,7 +26,6 @@ function login(email, password) {
                 user.authdata = window.btoa(email + ':' + password);
                 localStorage.setItem('user', JSON.stringify(user));
             }
-
             return user;
         });
 }
@@ -40,7 +40,6 @@ function getAll() {
         method: 'GET',
         headers: authHeader()
     };
-
     return fetch(`${apiUrl}/users`, requestOptions).then(handleResponse);
 }
 
@@ -57,7 +56,6 @@ function handleResponse(response) {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
         }
-
         return data;
     });
 }

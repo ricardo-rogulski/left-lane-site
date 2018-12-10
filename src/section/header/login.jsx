@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 export default props => (
     <div className="login">
-        <Link to="/" className="login">
+        <Link to="/login" className="login">
             <img src={login} alt="login" />
         </Link>
     </div>

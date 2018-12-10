@@ -1,0 +1,84 @@
+
+.cadastro-form {
+	float: left;
+	display: block;
+	position: relative;
+	width: 100%;
+    color: #333333;
+    min-height: 800px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.cadastro-form .cadastro-inner{
+	display: block;
+	width: 500px;
+	max-width: 80%;
+	background: white;
+	border-radius: 5px;
+	margin: 0 auto;
+	padding: 20px 40px;
+}
+
+.cadastro-form .cadastro-inner .google-btn {
+	background: #333;
+	display: inline-block;
+	color: white;
+	padding: 6px 10px;
+	border-radius: 4px;
+	margin-top: 15px;
+}
+
+.cadastro-form .cadastro-inner .google {
+	color: #fbbc05;
+	padding-right: 10px;
+	font-size: 20px
+}
+
+.cadastro-form .cadastro-inner .ou{
+	margin: 40px;
+	border-bottom: 1px dashed #999;
+}
+
+.cadastro-form .cadastro-inner .cadastro-label{
+	text-align: left;
+	margin: 20px 0 0 0;
+	font-size: 13px;
+}
+
+.cadastro-form .cadastro-inner .cadastro-input{
+	margin: 0;
+}
+
+.cadastro-form .cadastro-inner .forgot-pass{
+	margin: 0;
+	text-align: left;
+	font-size: 13px;
+	margin: 30px 0;
+}
+
+.cadastro-form .cadastro-inner .forgot-pass:hover{
+	text-decoration: underline;
+}
+
+
+.cadastro-form .cadastro-inner .cadastro-btn{
+	margin-top: 20px;
+	font-size: 14px;
+	margin-top: 10px;
+	padding: 8px 12px;
+	background: #333;
+	border: none;
+	position: relative;
+	font-weight: bold;
+	display: block;
+	margin: 20px auto;
+}
+
+.cadastro-form .cadastro-inner .google-btn:hover, .cadastro-form .cadastro-inner .cadastro-btn:hover {
+	background: #444;
+}
+
+.terms{
+	margin-bottom: 5px;
+}

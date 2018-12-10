@@ -7,20 +7,8 @@ import About from '../section/main/about'
 import Preco from '../section/main/precos'
 import Proposta from '../section/main/proposta'
 import Anuncie from '../section/main/anuncie'
-
-
-import Home from '../components/home/Home'
-import UserCrud from '../components/user/UserCrud'
-import ModelCrud from '../components/model/ModelCrud'
-import MakeCrud from '../components/make/MakeCrud'
-import YearCrud from '../components/year/YearCrud'
-import MileageCrud from '../components/mileage/MileageCrud'
-import PriceCrud from '../components/price/PriceCrud'
-import StateCrud from '../components/state/StateCrud'
-import CityCrud from '../components/city/CityCrud'
-import LoginPage from '../components/login/LoginPage'
-
-
+import Login from '../section/main/login'
+import Cadastro from '../section/main/cadastro'
 
 
 export default props =>
@@ -30,16 +18,7 @@ export default props =>
         <Route exact path='/precos' component={Preco} />
         <Route exact path='/proposta' component={Proposta} />
         <Route exact path='/anuncie' component={Anuncie} />
-
-        <PrivateRoute path='/makes' component={MakeCrud} />
-        <PrivateRoute path='/models' component={ModelCrud} />
-        <PrivateRoute path='/years' component={YearCrud} />
-        <PrivateRoute path='/mileages' component={MileageCrud} />
-        <PrivateRoute path='/prices' component={PriceCrud} />
-        <PrivateRoute path='/states' component={StateCrud} />
-        <PrivateRoute path='/cities' component={CityCrud} />
-        <PrivateRoute path='/users' component={UserCrud} />
-        <Route path='/login' component={LoginPage} />
-
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/cadastro' component={Cadastro} />
         <Redirect from='*' to='/' />
     </Switch>

@@ -26,6 +26,9 @@ export default class Footer extends Component {
                     <Link to="/precos" className="precos_">
                         <span>Preços</span>
                     </Link>
+                    <Link to="/login" className="login_">
+                        <span>Login</span>
+                    </Link>
 
                     <span className="email">contato@leftlane.com.br</span>
             </div>

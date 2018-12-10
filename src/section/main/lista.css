@@ -1,17 +1,31 @@
 
 .lista{
     margin-top: 20px;
+    text-align: center;
+    background: #F2F2F2;
 }
 
+.lista ul{
+    margin: 0;
+    padding: 0;
+}
 
 .lista ul li{
     display: inline-block;
-    background: #222;
+    background: #F2F2F2;
 }
 
 .car-wrapper {
     position: relative;
     margin: 4px;
+    border: 2px solid F2F2F2;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.car-wrapper:hover img{
+    transform: scale(1.12);
+    transition: 1s;
 }
 
 .car-info {

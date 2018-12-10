@@ -5,16 +5,19 @@ import axios from 'axios'
 
 import { Link } from 'react-router-dom'
 import './filtros.css'
+import { getMakeUrl, getYearUrl, getPriceUrl, getStateUrl } from '../../services/backEndUrlService';
 
-const makeUrl = 'http://localhost:3003/api/makes'
-const yearUrl = 'http://localhost:3003/api/years'
+const makeUrl = getMakeUrl()
+const yearUrl = getYearUrl()
+const priceUrl = getPriceUrl()
+const stateUrl = getStateUrl()
 
 const initialState = {
     marcas: [],
     anos: [], 
+    prices: [], 
+    estados: [], 
     lv2Content: [], 
-    anoOppened: false,
-    marcaOppened: false,
     currentOppenedLevel2: ''
 
 }
@@ -25,51 +28,59 @@ export default class Main extends Component {
     state = { ...initialState }
 
     componentWillMount(){
-
+        //Marcas
         if (localStorage.getItem('filterMarcas')){
             this.setState({marcas: JSON.parse(localStorage.getItem('filterMarcas'))})
-            this.setState({anos: JSON.parse(localStorage.getItem('filterAnos'))})
         }else{
             if (this.state.marcas.length === 0){
-                axios.get(makeUrl)
+                axios.get(`${makeUrl}?sort=name&searchActive=true`)
                 .then(resp => {
                     this.setState({ marcas: this.getMockList(resp.data)})
                 })
             }
+        }
+            
+        //Anos
+        if (localStorage.getItem('filterAnos')){
+            this.setState({anos: JSON.parse(localStorage.getItem('filterAnos'))})
+        }else{
             if (this.state.anos.length === 0){
-                axios.get(yearUrl)
+                axios.get(`${yearUrl}?sort=name&searchActive=true`)
                 .then(resp => {
                     this.setState({ anos: this.getMockList(resp.data)})
                 })
             }
         }
-            
-    }
 
-    openCloseMarcas(e){
-        if (!this.state.marcaOppened){
-            this.setState({marcaOppened: true})
-            this.setState({lv2Content: this.state.marcas})
-            this.setState({currentOppenedLevel2: 'marca'})
+        //Prices
+        if (localStorage.getItem('filterPrices')){
+            this.setState({prices: JSON.parse(localStorage.getItem('filterPrices'))})
         }else{
-            this.setState({marcaOppened: false})
-            this.setState({lv2Content: []})
-            this.setState({currentOppenedLevel2: ''})
+            if (this.state.prices.length === 0){
+                axios.get(`${priceUrl}?sort=name&searchActive=true`)
+                .then(resp => {
+                    this.setState({ prices: this.getMockList(resp.data)})
+                })
+            }
         }
-    }
 
-    openCloseAnos(e){
-        if (!this.state.anoOppened){
-            this.setState({anoOppened: true})
-            this.setState({lv2Content: this.state.anos})
-            this.setState({currentOppenedLevel2: 'ano'})
+        //Estados
+        if (localStorage.getItem('filterEstados')){
+            this.setState({estados: JSON.parse(localStorage.getItem('filterEstados'))})
         }else{
-            this.setState({anoOppened: false})
-            this.setState({lv2Content: []})
-            this.setState({currentOppenedLevel2: ''})
+            if (this.state.estados.length === 0){
+                axios.get(`${stateUrl}?sort=name&searchActive=true`)
+                .then(resp => {
+                    this.setState({ estados: this.getMockList(resp.data)})
+                })
+            }
         }
+
     }
 
+    /*
+    Métodos de renderização.
+    */
     renderLv2(){
         if (this.state.lv2Content.length > 0){
             return (
@@ -103,11 +114,17 @@ export default class Main extends Component {
         if (this.state.lv2Content.length){
             return (
                 <div className="lv2Operations">
-                    <button className="btn btn-link enableAll" onClick={() => this.selectAll(this.state.currentOppenedLevel2, true)}>
-                        <span className="selectAll">Marcar todos</span>
+                    <button className="btn btn-link close-btn" onClick={() => this.closeLevel2()}>
+                        <span className="arrow-left"><i class="fa fa-angle-double-left"></i></span>
+                        <span className="label">Fechar</span>
+                    </button>
+                    <button className="btn btn-link enableAll" alt="Marcar todos" onClick={() => this.selectAll(this.state.currentOppenedLevel2, true)}>
+                        <span className="arrow-left"><i class="fa fa-bars"></i></span>
+                        <span className="label">Marcar todos</span>
                     </button>
                     <button className="btn btn-link disableAll" onClick={() => this.selectAll(this.state.currentOppenedLevel2, false)}>
-                        <span className="selectAll">Desmarcar todos</span>
+                        <span className="arrow-left"><i class="fa fa-bars"></i></span>
+                        <span className="label">Desmarcar todos</span>
                     </button>
                 </div>
             )
@@ -119,21 +136,22 @@ export default class Main extends Component {
         return (
             <div>
                 <div className="filtros-lv1">
+                    <span className="filter-title">Filtros</span>
+
                     <button className={this.isMarcaActive() === true ? "btn btn-link selected" : "btn btn-link unselected"}
-                        onClick={e => this.openCloseMarcas(e)}>
+                        onClick={e => this.openMarcas(e)}>
                         <span>Marca</span>
                     </button>
-                    <button className="btn btn-link unselected">
-                        <span>Modelo</span>
-                    </button>
                     <button className={this.isAnoActive() === true ? "btn btn-link selected" : "btn btn-link unselected"}
-                        onClick={e => this.openCloseAnos(e)}>
+                        onClick={e => this.openAnos(e)}>
                         <span>Ano</span>
                     </button>
-                    <button className="btn btn-link unselected">
+                    <button className={this.isPriceActive() === true ? "btn btn-link selected" : "btn btn-link unselected"}
+                        onClick={e => this.openPrices(e)}>
                         <span>Valor</span>
                     </button>
-                    <button className="btn btn-link unselected">
+                    <button className={this.isEstadoActive() === true ? "btn btn-link selected" : "btn btn-link unselected"}
+                        onClick={e => this.openEstados(e)}>
                         <span>Local</span>
                     </button>
                 </div>
@@ -164,7 +182,15 @@ export default class Main extends Component {
 
         }else if (entity === 'ano'){
             this.toggleAnoSelection(element)
+
+        }else if (entity === 'price'){
+            this.togglePriceSelection(element)
+
+        }else if (entity === 'estado'){
+            this.toggleEstadoSelection(element)
         }
+
+
     }
 
     selectAll(entity, newStatus){
@@ -173,6 +199,12 @@ export default class Main extends Component {
 
         }else if (entity === 'ano'){
             this.selectAllAnos(newStatus)
+
+        }else if (entity === 'price'){
+            this.selectAllPrices(newStatus)
+
+        }else if (entity === 'estado'){
+            this.selectAllEstados(newStatus)
         }
         this.saveStateToLocalStorage()
     }
@@ -180,12 +212,24 @@ export default class Main extends Component {
     saveStateToLocalStorage(){
         localStorage.setItem('filterMarcas', JSON.stringify(this.state.marcas))
         localStorage.setItem('filterAnos', JSON.stringify(this.state.anos))
+        localStorage.setItem('filterPrices', JSON.stringify(this.state.prices))
+        localStorage.setItem('filterEstados', JSON.stringify(this.state.estados))
+    }
+
+    closeLevel2(){
+        this.setState({lv2Content: []})
+        this.setState({currentOppenedLevel2: ''})
     }
 
 
     /*
     Métodos específicos para Marca (Make)
     */
+   openMarcas(e){
+        this.setState({lv2Content: this.state.marcas})
+        this.setState({currentOppenedLevel2: 'marca'})
+    }
+
    toggleMarcaSelection(marca){
         this.state.marcas.map(current => {
             if (current._id === marca._id){
@@ -218,6 +262,10 @@ export default class Main extends Component {
     /*
     Métodos específicos para Ano (Year)
     */
+   openAnos(e){
+        this.setState({lv2Content: this.state.anos})
+        this.setState({currentOppenedLevel2: 'ano'})
+    }
 
     toggleAnoSelection(year){
         this.state.anos.map(current => {
@@ -247,6 +295,75 @@ export default class Main extends Component {
     }
 
 
+    /*
+    Métodos específicos para Preços (Year)
+    */
+   openPrices(e){
+        this.setState({lv2Content: this.state.prices})
+        this.setState({currentOppenedLevel2: 'price'})
+    }
 
+    togglePriceSelection(price){
+        this.state.prices.map(current => {
+            if (current._id === price._id){
+                current.selected = !current.selected
+            }
+        })
+        this.setState({prices: this.state.prices})
+        this.saveStateToLocalStorage()
+    }
+
+    selectAllPrices(newStatus){
+        this.state.prices.map(current => {
+                current.selected = newStatus
+        })
+        this.setState({prices: this.state.prices})
+    }
+
+    isPriceActive(){
+        let isActive = false
+        this.state.prices.map(price => {
+            if (price.selected === true){
+                isActive = true
+            }
+        })
+        return isActive
+    }
+
+
+    /*
+    Métodos específicos para Estado (State)
+    */
+   openEstados(e){
+        this.setState({lv2Content: this.state.estados})
+        this.setState({currentOppenedLevel2: 'estado'})
+    }
+
+    toggleEstadoSelection(estado){
+        this.state.estados.map(current => {
+            if (current._id === estado._id){
+                current.selected = !current.selected
+            }
+        })
+        this.setState({estados: this.state.estados})
+        this.saveStateToLocalStorage()
+    }
+
+    selectAllEstados(newStatus){
+        this.state.estados.map(current => {
+                current.selected = newStatus
+        })
+        this.setState({estados: this.state.estados})
+    }
+
+    isEstadoActive(){
+        let isActive = false
+        this.state.estados.map(estado => {
+            if (estado.selected === true){
+                isActive = true
+            }
+        })
+        return isActive
+    }
 
 }
